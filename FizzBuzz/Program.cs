@@ -10,24 +10,24 @@ namespace FizzBuzz
     {
         static void Main(string[] args)
         {
-            UserInteraction.EjecutarFizzBuzz();
+            UserInteraction.ExecuteFizzBuzz();
             Console.WriteLine("¡Gracias por haber usado la aplicación!");
         }
 
         public class UserInteraction
         {
-            public static void EjecutarFizzBuzz()
+            public static void ExecuteFizzBuzz()
             {
-                int numInicial = 0, numFinal = 0;
+                int numStart = 0, numEnd = 0;
                 bool valid = false;
 
                 do
                 {
                     try
                     {
-                        numInicial = RequestNumber("Inserte el número inicial para el FizzBuzz");
-                        numFinal = RequestNumber("Inserte el número final para el FizzBuzz");
-                        valid = ValidarNums(numInicial, numFinal);
+                        numStart = RequestNumber("Inserte el número inicial para el FizzBuzz");
+                        numEnd = RequestNumber("Inserte el número final para el FizzBuzz");
+                        valid = ValidateNums(numStart, numEnd);
                     }
                     catch (FormatException)
                     {
@@ -37,7 +37,7 @@ namespace FizzBuzz
                 } while (!valid);
 
 
-                PrintArray(FizzBuzz.GenerarSecuencia(numInicial, numFinal));
+                PrintArray(FizzBuzz.GenerateSequence(numStart, numEnd));
             }
 
             public static int RequestNumber(string Text)
@@ -48,15 +48,16 @@ namespace FizzBuzz
 
             public static void PrintArray(string[] array)
             {
+                Console.WriteLine("");
                 foreach (string str in array)
                 {
                     Console.WriteLine(str);
                 }
             }
 
-            public static bool ValidarNums(int NumInicial, int NumFinal)
+            public static bool ValidateNums(int NumStart, int NumEnd)
             {
-                bool valid = NumInicial < NumFinal;
+                bool valid = NumStart < NumEnd;
                 if (!valid) Console.WriteLine("El número inicial debe de ser menor al número final.\n");
                 return valid;
             }
@@ -64,11 +65,11 @@ namespace FizzBuzz
 
         public class FizzBuzz
         {
-            public static string[] GenerarSecuencia(int numInicial, int numFinal)
+            public static string[] GenerateSequence(int NumStart, int NumEnd)
             {
                 List<string> resultado = new List<string>();
 
-                for (int i = numInicial; i <= numFinal; i++)
+                for (int i = NumStart; i <= NumEnd; i++)
                 {
                     if (i % 3 == 0 && i % 5 == 0) resultado.Add("FizzBuzz");
                     else if (i % 3 == 0) resultado.Add("Fizz");
